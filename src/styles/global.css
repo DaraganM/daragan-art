@@ -1,0 +1,481 @@
+/* ==========================================================================
+   DARAGAN — global.css
+
+   Order:  1 Tokens · 2 Base · 3 Layout · 4 Shared components · 5 Site header
+           · 6 Site footer · 7 Home page · 8 Commissions page
+
+   House rules
+   - Every element's own declarations live in one rule, and a property is set
+     once for any given viewport. Group rules hold only what elements share.
+   - Nothing is forced with the important flag. Where a component beats a base
+     rule it does so by specificity (class over element), never by coming
+     later in the file.
+   - Viewport ranges never overlap, so nothing has to be "un-done":
+       mobile   max-width: 48rem
+       desktop  min-width: 48.01rem
+     The header also splits mobile into phone (max-width: 36rem) and
+     tablet (36.01rem to 48rem).
+   ========================================================================== */
+
+
+/* 1. Tokens ---------------------------------------------------------------- */
+
+:root {
+  color-scheme: light;
+
+  --chalk: #EDF0F1;
+  --ink: #16232B;
+  --graphite: #54636D;
+  --rule: #C5CED3;
+  --verdigris: #1D7A6C;
+  --teal: #0f7f83;
+  --paper: #f6f1e7;
+  --mist: #e7eff1;
+  --alert: #C0392B;
+  --hairline: rgba(15, 30, 40, .18);
+
+  --serif: Charter, "Bitstream Charter", "Sitka Text", Cambria, serif;
+  --sans: "Avenir Next", "Segoe UI Variable Display", "Segoe UI", system-ui, sans-serif;
+  --display: Georgia, "Times New Roman", serif;
+
+  --page: 90rem;
+  --gutter: 1.5rem; /* side padding of .wrap; a component may redefine it */
+}
+
+
+/* 2. Base ------------------------------------------------------------------ */
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--chalk);
+  color: var(--ink);
+  font: 1.125rem/1.7 var(--serif);
+}
+
+a {
+  color: inherit;
+  text-decoration-color: var(--verdigris);
+  text-underline-offset: .2em;
+}
+a:hover { color: var(--verdigris); }
+
+:focus-visible {
+  outline: 2px solid var(--verdigris);
+  outline-offset: 3px;
+}
+
+h1, h2 {
+  font-family: var(--sans);
+  font-weight: 300;
+  line-height: 1.05;
+}
+h1 { margin: 0; font-size: clamp(2.5rem, 7vw, 4.5rem); letter-spacing: -.03em; }
+h2 { margin: 0 0 2rem; font-size: clamp(1.75rem, 4vw, 2.75rem); }
+
+
+/* 3. Layout ---------------------------------------------------------------- */
+
+.wrap {
+  max-width: var(--page);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+section { padding-block: 4rem; }
+
+
+/* 4. Shared components ----------------------------------------------------- */
+
+/* Variants only set --btn-bg / --btn-fg; they never fight .btn. */
+.btn {
+  display: inline-block;
+  padding: .8rem 1.4rem;
+  border: 0;
+  background: var(--btn-bg, var(--ink));
+  color: var(--btn-fg, var(--chalk));
+  font: 600 1rem var(--sans);
+  text-decoration: none;
+  cursor: pointer;
+}
+.btn:hover { background: var(--verdigris); color: var(--btn-fg, var(--chalk)); }
+
+.text-link {
+  text-decoration: none;
+  border-bottom: 1px solid currentColor;
+  padding-bottom: .15rem;
+  transition: opacity 160ms ease;
+}
+.text-link:hover { opacity: .6; }
+
+
+/* 5. Site header ----------------------------------------------------------- */
+
+.site-header {
+  display: flex;
+  justify-content: space-between;
+  padding-block: .9rem .7rem;
+  border-bottom: 1px solid var(--hairline);
+}
+
+.header-brand { display: flex; min-width: 0; }
+
+.mark {
+  font: 600 clamp(1.8rem, 2.6vw, 2.5rem)/1 var(--display);
+  letter-spacing: .04em;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.header-tagline {
+  font-family: var(--display);
+  line-height: 1.2;
+  opacity: .75;
+}
+
+.header-nav > a:not(.header-cta) {
+  color: inherit;
+  text-decoration: none;
+  font-size: .9rem;
+}
+.header-nav > a:not(.header-cta):hover { text-decoration: underline; }
+
+.header-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.55rem;
+  padding: .65rem 1rem;
+  border-radius: .25rem;
+  background: var(--teal);
+  color: #fff;
+  text-decoration: none;
+  font-size: .9rem;
+  line-height: 1;
+  white-space: nowrap;
+}
+.header-cta:hover { color: #fff; filter: brightness(.95); }
+
+@media (max-width: 36rem) { /* phone */
+  .site-header { flex-direction: column; align-items: flex-start; gap: .8rem; }
+  .header-brand { flex-direction: column; align-items: flex-start; gap: 1rem; width: 100%; }
+  .header-tagline { font-size: .72rem; }
+  .header-nav { display: grid; grid-template-columns: repeat(3, auto) 1fr; align-items: center; gap: 1rem; width: 100%; }
+  .header-cta { grid-column: 1 / -1; justify-self: start; }
+}
+
+@media (min-width: 36.01rem) and (max-width: 48rem) { /* tablet */
+  .site-header { flex-direction: column; align-items: flex-start; gap: .8rem; }
+  .header-brand { align-items: baseline; justify-content: space-between; gap: 1rem; width: 100%; }
+  .header-tagline { font-size: .72rem; text-align: right; }
+  .header-nav { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem; width: 100%; }
+  .header-cta { margin-left: auto; }
+}
+
+@media (min-width: 48.01rem) {
+  .site-header { align-items: center; gap: 2rem; }
+  .header-brand { align-items: baseline; gap: 1.5rem; }
+  .header-tagline { font-size: .8rem; white-space: nowrap; }
+  .header-nav { display: flex; align-items: center; gap: 1.5rem; margin-left: auto; }
+}
+
+
+/* 6. Site footer ----------------------------------------------------------- */
+
+.site-footer {
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid var(--rule);
+  font-family: var(--sans);
+  font-size: .9rem;
+}
+
+.footer-copy { margin: 0; white-space: nowrap; }
+
+.footer-right { display: flex; align-items: center; }
+
+.footer-nav { display: flex; align-items: center; gap: 1.25rem; }
+
+.footer-nav a { color: var(--ink); text-decoration: none; }
+.footer-nav a:hover { color: var(--verdigris); }
+
+/* Social links (markup: src/components/SocialLinks.astro, addresses: src/data/social.json) */
+
+/* The negative margin lines the glyphs, not their 2.25rem tap targets, up with the text edges. */
+.footer-social { display: flex; align-items: center; gap: .25rem; margin-inline: -.375rem; }
+
+.social {
+  display: grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 50%;
+  color: var(--brand, var(--ink));
+}
+.social svg { width: 1.5rem; height: 1.5rem; }
+.social:hover,
+.social:focus-visible {
+  color: var(--brand);
+  background: color-mix(in srgb, var(--brand) 14%, transparent);
+}
+
+.social-instagram { --brand: #e1306c; }
+.social-facebook { --brand: #1877f2; }
+.social-telegram { --brand: #1b8bc4; } /* Telegram blue, darkened to keep 3:1 contrast on the page */
+.social-email { --brand: var(--teal); }
+
+@media (prefers-reduced-motion: no-preference) {
+  .social { transition: background-color 180ms ease, transform 180ms ease; }
+  .social:hover,
+  .social:focus-visible { transform: translateY(-2px); }
+}
+
+@media (max-width: 48rem) {
+  .site-footer { flex-direction: column; align-items: flex-start; gap: 1rem; padding-block: 1.25rem; }
+  .footer-right { flex-wrap: wrap; justify-content: space-between; gap: .5rem 1.5rem; width: 100%; }
+}
+
+@media (min-width: 48.01rem) {
+  .site-footer { align-items: center; gap: 2rem; padding-block: 1rem 1.25rem; }
+  .footer-right { gap: 1.5rem; }
+}
+
+
+/* 7. Home page ------------------------------------------------------------- */
+
+/* 7.1 Hero */
+
+.hero-editorial {
+  display: grid;
+  align-items: center;
+  margin-top: .75rem;
+  padding-block: 2.25rem;
+  overflow: hidden;
+  background: var(--paper);
+  border-bottom: 1px solid var(--hairline);
+}
+
+.hero-copy { position: relative; top: 2rem; z-index: 2; min-width: 0; }
+
+.hero-copy h1 {
+  font-family: var(--display);
+  font-weight: 600;
+  line-height: .88;
+  letter-spacing: -.055em;
+}
+
+.hero-kicker { margin: .85rem 0 0; font: 1.05rem/1.25 var(--display); }
+
+.hero-description { max-width: 24rem; margin: 1.6rem 0 0; font-size: .98rem; line-height: 1.48; }
+
+.hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 1.25rem; margin-top: 1.6rem; }
+
+.hero-primary { --btn-bg: var(--teal); --btn-fg: #fff; }
+
+.hero-car { margin: 0; min-width: 0; align-self: center; }
+.hero-car img { display: block; width: 100%; height: auto; }
+
+@media (max-width: 48rem) {
+  .hero-editorial { --gutter: 1.25rem; grid-template-columns: 1fr; gap: 1.5rem; }
+  .hero-copy h1 { font-size: clamp(3.8rem, 18vw, 6rem); }
+}
+
+@media (min-width: 48.01rem) {
+  .hero-editorial { --gutter: 2.25rem; grid-template-columns: minmax(0, .9fr) minmax(0, 1.35fr); gap: 1.25rem; }
+  .hero-copy h1 { font-size: clamp(4.3rem, 6.6vw, 7rem); white-space: nowrap; }
+}
+
+
+/* 7.2 Selected work */
+
+#work { border-top: 1px solid var(--hairline); }
+
+.work-heading h2 { font-family: var(--display); font-weight: 400; letter-spacing: -.035em; }
+
+.work-all-link {
+  display: block;
+  margin-left: auto;
+  margin-bottom: .35rem;
+  border-bottom: 1px solid var(--ink);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: .95rem;
+  font-weight: 500;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.work-all-link:hover { color: var(--verdigris); border-bottom-color: var(--verdigris); }
+
+.works { display: grid; align-items: start; margin: 0; padding: 0; list-style: none; }
+
+/* Cards are placed by slug (see src/data/works.json). A work without a rule here
+   is auto-placed in the next free cell. */
+.work-card-hms-sutherland { grid-area: ship; }
+.work-card-crossbow-ranger { grid-area: crossbow; }
+.work-card-night-by-the-river { grid-area: night; }
+.work-card-beluga-and-a380 { grid-area: beluga; }
+.work-card-architecture-in-blue { grid-area: architecture; }
+
+.works img { display: block; width: 100%; height: auto; outline: 1px solid var(--rule); outline-offset: -1px; }
+.works h3 { font-family: var(--sans); font-weight: 600; }
+.works p { margin: 0; color: var(--graphite); }
+
+@media (max-width: 48rem) {
+  #work { --gutter: 1rem; padding-top: 1.25rem; }
+  .work-heading { margin-bottom: 1.25rem; }
+  .work-heading h2 { margin: 0 0 .7rem; font-size: clamp(2.6rem, 12vw, 3.6rem); }
+  .works {
+    grid-template-columns: 1fr;
+    grid-template-areas: "crossbow" "night" "beluga" "ship" "architecture";
+    gap: 2rem;
+  }
+  .works h3 { margin: .45rem 0 .08rem; font-size: 1rem; line-height: 1.2; }
+  .works p { font-size: .9rem; line-height: 1.25; }
+}
+
+@media (min-width: 48.01rem) {
+  #work { padding-top: 2.6rem; }
+  .work-heading { display: flex; align-items: flex-end; justify-content: space-between; gap: 1.5rem; margin-bottom: 1.4rem; }
+  .work-heading h2 { margin: 0; }
+  .works {
+    grid-template-columns: 1.2fr 1.1fr 1.1fr;
+    grid-template-areas: "crossbow night beluga" "crossbow ship architecture";
+    gap: 1.35rem 1.4rem;
+  }
+  .works h3 { margin: .55rem 0 .08rem; font-size: 1.15rem; line-height: normal; }
+}
+
+
+/* 7.3 Categories */
+
+.categories { display: grid; padding-block: 1.4rem; border-block: 1px solid var(--rule); }
+
+.category-card h3 { font-family: var(--display); font-weight: 400; }
+.category-card p { margin: 0 0 .9rem; color: var(--graphite); line-height: 1.35; }
+.category-card a {
+  display: inline-block;
+  border-bottom: 1px solid currentColor;
+  font-family: var(--sans);
+  font-size: .9rem;
+  text-decoration: none;
+}
+.category-card img { display: block; width: 100%; }
+
+@media (max-width: 48rem) {
+  .categories { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .category-card { display: flex; flex-direction: column; min-width: 0; padding: .9rem; }
+  .category-card:nth-child(odd) { border-right: 1px solid var(--rule); }
+  .category-card:nth-child(-n + 2) { border-bottom: 1px solid var(--rule); }
+  .category-card img { height: 155px; margin: 0 0 .65rem; object-fit: cover; object-position: center; }
+  .category-card:first-child img { height: 190px; object-fit: contain; object-position: center top; }
+  .category-card h3 { margin: 0 0 .35rem; font-size: clamp(1.45rem, 7vw, 1.75rem); line-height: 1.05; }
+}
+
+@media (min-width: 48.01rem) {
+  .categories { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .category-card { padding: .4rem 1.5rem .5rem; }
+  .category-card:not(:last-child) { border-right: 1px solid var(--rule); }
+  .category-card:first-child { padding-left: 0; }
+  .category-card:last-child { padding-right: 0; }
+  .category-card img { height: 8.5rem; margin-bottom: .85rem; object-fit: cover; object-position: center top; }
+  .category-card h3 { margin: 0 0 .55rem; font-size: clamp(1.7rem, 2.4vw, 2.25rem); line-height: 1; }
+}
+
+
+/* 7.4 Commission strip */
+
+.commission-grid {
+  display: grid;
+  align-items: start;
+  padding-block: 1.35rem;
+  background: var(--mist);
+  border-block: 1px solid var(--rule);
+}
+
+.commission-intro { padding-right: 2rem; }
+.commission-intro h2 { margin: 0 0 .8rem; font: 400 clamp(2.15rem, 3.4vw, 3.35rem)/.95 var(--display); letter-spacing: -.03em; }
+.commission-intro p { max-width: 25rem; margin: 0; font-size: .95rem; line-height: 1.4; }
+
+.commission-number { display: block; margin-bottom: .8rem; font: 1.5rem/1 var(--display); }
+.commission-step { min-height: 8.2rem; }
+.commission-step h3 { margin: 0 0 .35rem; font-family: var(--sans); font-size: 1rem; font-weight: 600; }
+.commission-step p { margin: 0; color: var(--graphite); line-height: 1.35; }
+
+.commission-actions { display: flex; gap: 1.5rem; margin-top: .65rem; }
+.commission-actions .btn { --btn-bg: var(--verdigris); --btn-fg: #fff; }
+
+@media (max-width: 48rem) {
+  .commission-strip { padding-block: 2.25rem; }
+  .commission-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+  .commission-step { padding: 1.25rem 0 0; border-top: 1px solid var(--rule); }
+  .commission-actions { flex-direction: column; align-items: flex-start; }
+}
+
+@media (min-width: 48.01rem) {
+  .commission-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .commission-step { padding: 0 1.5rem; border-left: 1px solid var(--rule); }
+  .commission-actions { grid-column: 2 / 5; align-items: center; padding-left: 1.5rem; }
+}
+
+
+/* 7.5 About */
+
+.about-editorial { display: grid; padding-block: 1.35rem; border-top: 1px solid var(--rule); }
+
+.about-title h2 { margin: 0; font-family: var(--display); font-weight: 400; line-height: 1; letter-spacing: -.035em; }
+.about-title img { display: block; object-fit: cover; }
+
+.about-copy > p { max-width: 40rem; margin: 0 0 .75rem; font-size: .98rem; line-height: 1.4; }
+.about-copy > .about-lead { margin: 0 0 .9rem; font: 1.22rem/1.35 var(--display); }
+.about-copy > .about-meta { margin-top: 2rem; color: var(--graphite); font-size: .92rem; opacity: .65; }
+.about-copy > .text-link { display: inline-block; margin-top: .5rem; }
+
+.about-art img { display: block; object-fit: cover; }
+
+@media (max-width: 48rem) {
+  .about-editorial { grid-template-columns: 1fr; gap: 1.5rem; }
+  .about-title { display: grid; grid-template-columns: 1fr; gap: 1rem; }
+  .about-title h2 { font-size: clamp(3rem, 15vw, 4rem); }
+  .about-title img { width: 100%; height: 165px; object-position: center top; }
+  .about-copy { font-size: 1rem; line-height: 1.45; }
+  .about-art { margin-bottom: .75rem; }
+  .about-art img { width: 100%; height: 180px; object-position: center top; }
+}
+
+@media (min-width: 48.01rem) {
+  .about-editorial { grid-template-columns: repeat(4, minmax(0, 1fr)); align-items: stretch; }
+  .about-title { display: contents; }
+  .about-title h2 { grid-column: 1; min-width: 0; font-size: clamp(2.6rem, 3.6vw, 3.6rem); }
+  /* Columns 2-4 are separated by a hairline and a 1rem inset. */
+  .about-title img {
+    grid-column: 2; min-width: 0;
+    width: 100%; height: 340px; object-position: 50% 0%;
+    padding-left: 1rem; border-left: 1px solid var(--rule);
+  }
+  .about-copy { grid-column: 3; min-width: 0; padding-inline: 1rem; border-left: 1px solid var(--rule); }
+  .about-art { grid-column: 4; min-width: 0; padding-left: 1rem; border-left: 1px solid var(--rule); }
+  .about-art img { width: 100%; height: 340px; object-position: 50% 0%; }
+}
+
+
+/* 8. Commissions page ------------------------------------------------------ */
+
+.lead { max-width: 36rem; margin: 2rem 0; font-size: clamp(1.35rem, 2.6vw, 1.9rem); line-height: 1.4; }
+
+.steps { max-width: 40rem; padding: 0; list-style: none; counter-reset: s; }
+.steps li { position: relative; padding: 1rem 0 1rem 3rem; border-top: 1px solid var(--rule); counter-increment: s; }
+.steps li::before { content: counter(s); position: absolute; left: 0; color: var(--verdigris); font: 300 2rem/1 var(--sans); }
+.steps b { font-family: var(--sans); }
+
+form { display: grid; gap: 1.25rem; max-width: 40rem; }
+label { display: grid; gap: .35rem; font: 600 .95rem var(--sans); }
+label span { color: var(--graphite); font-weight: 400; }
+input,
+select,
+textarea { padding: .7rem .8rem; border: 1px solid var(--graphite); border-radius: 0; background: transparent; color: var(--ink); font: 1.05rem var(--serif); }
+textarea { min-height: 9rem; }
+
+.trap { position: absolute; left: -9999px; } /* honeypot field, hidden from people */
+.note { margin: 0; color: var(--graphite); font: .95rem var(--sans); }
+.error { max-width: 40rem; padding-left: 1rem; border-left: 3px solid var(--alert); }

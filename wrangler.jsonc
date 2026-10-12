@@ -1,0 +1,41 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "daragan",
+  "main": "worker/index.js",
+  "compatibility_date": "2026-09-01",
+
+  // Served only on the custom domain: no workers.dev URL, no preview URLs.
+  "workers_dev": false,
+  "preview_urls": false,
+  "routes": [{ "pattern": "daragan.art", "custom_domain": true }],
+
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS",
+    "not_found_handling": "404-page",
+    // Only the API goes through the Worker; everything else is a static file.
+    "run_worker_first": ["/api/*"]
+  },
+
+  // Commission requests are e-mailed through Cloudflare Email Routing.
+  // No destination is pinned here: the recipient is the NOTIFY_EMAIL secret,
+  // so the owner's mailbox never appears in Git.
+  "send_email": [
+    {
+      "name": "SEND_EMAIL",
+      "allowed_sender_addresses": ["commissions@daragan.art"]
+    }
+  ],
+
+  "vars": {
+    "FROM_ADDRESS": "commissions@daragan.art"
+  },
+
+  // Secrets are never stored in this file. Set them once with:
+  //   npx wrangler secret put TURNSTILE_SECRET
+  //   npx wrangler secret put NOTIFY_EMAIL
+  // For local development use .dev.vars (see .dev.vars.example).
+  "secrets": {
+    "required": ["TURNSTILE_SECRET", "NOTIFY_EMAIL"]
+  }
+}

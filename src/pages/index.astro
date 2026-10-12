@@ -1,0 +1,205 @@
+---
+import Base from "../layouts/Base.astro";
+import works from "../data/works.json";
+---
+<Base title="Daragan: characters, machines, cities, worlds">
+  <div class="wrap hero hero-editorial">
+  <div class="hero-copy">
+    <h1>Daragan</h1>
+
+    <p class="hero-kicker">
+      Characters · Machines · Cities · Worlds
+    </p>
+
+    <p class="hero-description">
+      Characters, machines, cities and imagined worlds —
+      drawn with attention to proportion, perspective and light.
+    </p>
+
+    <div class="hero-actions">
+      <a class="btn hero-primary" href="/commissions/">
+        Request a commission →
+      </a>
+
+      <a class="text-link" href="#work">
+        Explore the work ↓
+      </a>
+    </div>
+  </div>
+
+  <figure class="hero-car">
+    <img
+  src="/works/classic-car-640.webp"
+  srcset="/works/classic-car-640.webp 640w, /works/classic-car-1095.webp 1095w"
+  sizes="(min-width: 48rem) 62vw, 100vw"
+  width="1095"
+height="575"
+  alt="Sketch of a classic turquoise American car"
+  decoding="async"
+  fetchpriority="high"
+/>
+  </figure>
+</div>
+  <section id="work" class="wrap">
+  <div class="work-heading">
+    <h2>Selected Work</h2>
+<a class="work-all-link" href="#work">View all work →</a>
+  </div>
+    <ul class="works">
+      {works.map((w) => (
+  <li class={`work-card work-card-${w.slug}`}>
+          <img
+            src={`/works/${w.slug}-${w.widths.at(-1)}.webp`}
+            srcset={w.widths.map((x) => `/works/${w.slug}-${x}.webp ${x}w`).join(", ")}
+            sizes="(min-width: 48rem) 50vw, 100vw"
+            width={w.width}
+            height={w.height}
+            alt={w.alt}
+            loading="lazy"
+            decoding="async"
+          />
+          <h3>{w.title}</h3>
+          <p>{w.category}</p>
+        </li>
+      ))}
+    </ul>
+  </section>
+  <section class="wrap categories">
+  <div class="category-card">
+    <img
+      src="/works/crossbow-ranger-640.webp"
+      alt="Character illustration"
+      loading="lazy"
+      decoding="async"
+    />
+    <h3>Characters</h3>
+    <p>Original characters, D&D, portraits, concept art.</p>
+    <a href="#work">View characters →</a>
+  </div>
+
+  <div class="category-card">
+    <img
+      src="/works/beluga-and-a380-640.webp"
+      alt="Aircraft illustration"
+      loading="lazy"
+      decoding="async"
+    />
+    <h3>Machines</h3>
+    <p>Vehicles, aircraft, ships, technical illustration.</p>
+    <a href="#work">View machines →</a>
+  </div>
+
+  <div class="category-card">
+    <img
+      src="/works/architecture-in-blue-640.webp"
+      alt="Architecture sketch"
+      loading="lazy"
+      decoding="async"
+    />
+    <h3>Cities</h3>
+    <p>Urban sketches, architecture, places and atmosphere.</p>
+    <a href="#work">View cities →</a>
+  </div>
+
+  <div class="category-card">
+    <img
+      src="/works/night-by-the-river-640.webp"
+      alt="Sketchbook style urban drawing"
+      loading="lazy"
+      decoding="async"
+    />
+    <h3>Sketches</h3>
+    <p>Sketchbooks, studies, ideas and visual notes.</p>
+    <a href="#work">View sketches →</a>
+  </div>
+</section>
+<section class="commission-strip">
+  <div class="wrap commission-grid">
+
+    <div class="commission-intro">
+      <h2>Commission<br />an artwork</h2>
+
+      <p>
+        I create original drawings and paintings based on your idea —
+        from characters and vehicles to cities and personal projects.
+      </p>
+    </div>
+
+    <div class="commission-step">
+      <span class="commission-number">1</span>
+      <h3>Choose a subject</h3>
+      <p>
+        Tell me what you'd like — character, vehicle, place or your own idea.
+      </p>
+    </div>
+
+    <div class="commission-step">
+      <span class="commission-number">2</span>
+      <h3>Share references</h3>
+      <p>
+        Send photos, sketches or a short description of your idea.
+      </p>
+    </div>
+
+    <div class="commission-step">
+      <span class="commission-number">3</span>
+      <h3>Receive your artwork</h3>
+      <p>
+        I'll create a unique artwork and keep you updated during the process.
+      </p>
+    </div>
+
+    <div class="commission-actions">
+      <a class="btn" href="/commissions/">
+        Request a commission →
+      </a>
+
+      <a class="text-link" href="/commissions/">
+        Learn more about commissions →
+      </a>
+    </div>
+
+  </div>
+</section>
+  <section class="wrap about about-editorial">
+  <div class="about-title">
+    <h2>About</h2>
+
+    <img
+      src="/works/crossbow-ranger-640.webp"
+      alt="Character sketch"
+      loading="lazy"
+      decoding="async"
+    />
+  </div>
+
+  <div class="about-copy">
+    <p class="about-lead">
+      Trained as a physicist, I draw the way I measure:
+      I check the proportions, follow the light, then bring in the imagination.
+    </p>
+
+    <p>
+      My work moves between characters, machines, architecture and urban
+      sketches, combining observation with invented worlds.
+    </p>
+
+    <p class="about-meta">
+      I work with clients worldwide and speak English, German, Ukrainian and Russian.
+    </p>
+
+    <a class="text-link" href="/commissions/">
+      More about me →
+    </a>
+  </div>
+
+  <div class="about-art">
+    <img
+      src="/works/architecture-in-blue-640.webp"
+      alt="Architecture sketch"
+      loading="lazy"
+      decoding="async"
+    />
+  </div>
+</section>
+</Base>

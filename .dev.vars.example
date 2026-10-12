@@ -1,0 +1,5 @@
+# Copy to .dev.vars for local development (npm run cf:dev). Never commit .dev.vars.
+# Cloudflare's public test secret: Turnstile always passes. Dev builds use the matching test site key.
+TURNSTILE_SECRET=1x0000000000000000000000000000000AA
+# Where commission e-mails are delivered: an address verified in Cloudflare Email Routing.
+NOTIFY_EMAIL=you@example.com

@@ -1,0 +1,42 @@
+---
+import Base from "../layouts/Base.astro";
+const types = ["D&D or fantasy character", "Portrait", "Urban sketch or architecture", "Vehicle or machine", "Science fiction or space", "Other"];
+const turnstileSiteKey = import.meta.env.PROD
+  ? "0x4AAAAAAFKJ4krrmbyRwhgv"
+  : "1x00000000000000000000AA";
+---
+<Base title="Commissions | Daragan" description="Commission a custom character, portrait, urban sketch, machine or science-fiction scene from Mykhailo Daragan.">
+  <div class="wrap">
+    <section>
+      <h1>Commissions</h1>
+      <p class="lead">Tell me what you want drawn. I reply by email with a plan and a quote.</p>
+      <ol class="steps">
+        <li><b>Brief.</b> You describe the idea and send references.</li>
+        <li><b>Sketch.</b> I send a rough composition.</li>
+        <li><b>Refine.</b> We adjust it together.</li>
+        <li><b>Deliver.</b> You receive the final files.</li>
+      </ol>
+    </section>
+    <section id="request">
+      <h2>Request a commission</h2>
+      <p class="error" id="err" role="alert" hidden>Your request was not sent. Fill in name, email and brief, then send it again.</p>
+      <form method="post" action="/api/commission">
+        <label>Name <input name="name" required maxlength="100" autocomplete="name" /></label>
+        <label>Email <input name="email" type="email" required maxlength="200" autocomplete="email" /></label>
+        <label>What should I draw?
+          <select name="type">{types.map((t) => <option>{t}</option>)}</select>
+        </label>
+        <label>Brief <textarea name="brief" required maxlength="4000"></textarea></label>
+        <label>References <span>Links to images or notes (optional)</span> <input name="links" maxlength="1000" /></label>
+        <label>Deadline <span>(optional)</span> <input name="deadline" maxlength="100" /></label>
+        <label>Budget <span>(optional)</span> <input name="budget" maxlength="100" /></label>
+        <label class="trap" aria-hidden="true">Website <input name="website" tabindex="-1" autocomplete="off" /></label>
+        <div class="cf-turnstile" data-sitekey={turnstileSiteKey}></div>
+        <button class="btn" type="submit">Send request</button>
+        <p class="note">I use your details only to reply to your request.</p>
+      </form>
+    </section>
+  </div>
+  <script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+<script is:inline src="/commission.js" defer></script>
+</Base>

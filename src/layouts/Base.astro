@@ -1,0 +1,75 @@
+---
+import "../styles/global.css";
+import SocialLinks from "../components/SocialLinks.astro";
+const {
+  title,
+  description = "Commissioned illustration by Mykhailo Daragan: characters, machines, cities and worlds.",
+  noindex = false,
+  image = "/og-image.png",
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const socialImage = new URL(image, Astro.site);
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={socialImage} />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:alt" content="Daragan - artwork by Mykhailo Daragan" />
+    <meta property="og:site_name" content="Daragan" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={socialImage} />
+    <meta name="twitter:image:alt" content="Daragan - artwork by Mykhailo Daragan" />
+    {noindex && <meta name="robots" content="noindex" />}
+  </head>
+  <body>
+    <header class="wrap site-header">
+  <div class="header-brand">
+    <a class="mark" href="/">Daragan</a>
+
+    <span class="header-tagline">
+      Characters · Machines · Cities · Worlds
+    </span>
+  </div>
+
+  <nav class="header-nav" aria-label="Primary navigation">
+    <a href="/#work">Work</a>
+    <a href="/commissions/">Commissions</a>
+    <a href="/#about">About</a>
+
+    <a class="header-cta" href="/commissions/">
+      Request a commission →
+    </a>
+  </nav>
+</header>
+    <main><slot /></main>
+    <footer class="wrap site-footer">
+  <p class="footer-copy">
+    © {new Date().getFullYear()} Mykhailo Daragan
+  </p>
+
+  <div class="footer-right">
+    <nav class="footer-nav" aria-label="Footer navigation">
+      <a href="/#work">Work</a>
+      <a href="/commissions/">Commissions</a>
+      <a href="/#about">About</a>
+    </nav>
+
+    <SocialLinks />
+  </div>
+</footer>
+  </body>
+</html>

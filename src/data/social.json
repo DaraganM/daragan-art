@@ -1,0 +1,22 @@
+[
+  {
+    "id": "instagram",
+    "label": "Instagram",
+    "href": "https://www.instagram.com/mike_daragan"
+  },
+  {
+    "id": "facebook",
+    "label": "Facebook",
+    "href": "https://www.facebook.com/mike.daragan"
+  },
+  {
+    "id": "telegram",
+    "label": "Telegram",
+    "href": "https://t.me/MykhailoDaragan"
+  },
+  {
+    "id": "email",
+    "label": "Email",
+    "href": "mailto:hello@daragan.art"
+  }
+]

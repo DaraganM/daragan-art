@@ -1,0 +1,62 @@
+[
+  {
+    "slug": "hms-sutherland",
+    "title": "HMS Sutherland",
+    "category": "Ship",
+    "alt": "Marker and pencil sketch of the frigate HMS Sutherland moored at a quay, with flags along the deck",
+    "widths": [
+      640,
+      1095
+    ],
+    "width": 1095,
+    "height": 833
+  },
+  {
+    "slug": "crossbow-ranger",
+    "title": "Crossbow ranger",
+    "category": "Character design",
+    "alt": "Full-length drawing of a ranger in a green plaid shirt holding a crossbow, with tools hanging from the belt",
+    "widths": [
+      640,
+      756
+    ],
+    "width": 756,
+    "height": 1220
+  },
+  {
+    "slug": "night-by-the-river",
+    "title": "Night by the river",
+    "category": "Urban sketch",
+    "alt": "Violet and blue marker sketch of a crowd at night in front of a cable-stayed bridge and a TV tower",
+    "widths": [
+      640,
+      1200
+    ],
+    "width": 1200,
+    "height": 920
+  },
+  {
+    "slug": "beluga-and-a380",
+    "title": "BelugaXL and A380",
+    "category": "Aircraft",
+    "alt": "Two-page sketchbook spread of an Airbus BelugaXL cargo plane and the tail of an A380, with a small figure for scale",
+    "widths": [
+      640,
+      1194
+    ],
+    "width": 1194,
+    "height": 591
+  },
+  {
+    "slug": "architecture-in-blue",
+    "title": "Architecture in blue ballpoint",
+    "category": "Architecture",
+    "alt": "Blue ballpoint pen sketch of a stepped building with tall columns and statues, and a detail of one statue",
+    "widths": [
+      640,
+      870
+    ],
+    "width": 870,
+    "height": 890
+  }
+]
