@@ -1,0 +1,51 @@
+---
+import Base from "../layouts/Base.astro";
+import works from "../data/works.json";
+import groups from "../data/groups.json";
+
+const sections = groups
+  .map((g) => ({ ...g, items: works.filter((w) => w.group === g.id) }))
+  .filter((g) => g.items.length > 0);
+---
+<Base
+  title="Work | Daragan"
+  description="Drawings and sketches by Mykhailo Daragan: characters, machines, cities and sketchbook studies."
+>
+  <div class="wrap">
+    <section class="work-intro">
+      <h1>Work</h1>
+      <p class="lead">Characters, machines, cities and sketchbook studies.</p>
+      <nav class="group-nav" aria-label="Work categories">
+        {sections.map((g) => <a class="text-link" href={`#${g.id}`}>{g.title}</a>)}
+      </nav>
+    </section>
+  </div>
+  {sections.map((g) => (
+    <section id={g.id} class="wrap work-group">
+      <h2>{g.title}</h2>
+      <p class="group-blurb">{g.blurb}</p>
+      <ul class="gallery">
+        {g.items.map((w) => (
+          <li>
+            <img
+              src={`/works/${w.slug}-${w.widths.at(-1)}.webp`}
+              srcset={w.widths.map((x) => `/works/${w.slug}-${x}.webp ${x}w`).join(", ")}
+              sizes="(min-width: 48rem) 33vw, 100vw"
+              width={w.width}
+              height={w.height}
+              alt={w.alt}
+              loading="lazy"
+              decoding="async"
+            />
+            <h3>{w.title}</h3>
+            <p>{w.category}</p>
+          </li>
+        ))}
+      </ul>
+    </section>
+  ))}
+  <section class="wrap work-group">
+    <p class="lead">Want something drawn?</p>
+    <a class="btn" href="/commissions/">Request a commission →</a>
+  </section>
+</Base>

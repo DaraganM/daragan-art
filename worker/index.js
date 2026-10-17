@@ -36,7 +36,7 @@ export default {
 
     const turnstileToken = clean(form.get("cf-turnstile-response"), 2048);
 
-    const name = clean(form.get("name"), 100).replace(/\n+/g, " ");
+    const name = clean(form.get("name"), 100);
     const email = clean(form.get("email"), 200);
     const brief = clean(form.get("brief"), 4000);
     const picked = clean(form.get("type"), 60);

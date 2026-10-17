@@ -2,7 +2,8 @@
    DARAGAN — global.css
 
    Order:  1 Tokens · 2 Base · 3 Layout · 4 Shared components · 5 Site header
-           · 6 Site footer · 7 Home page · 8 Commissions page
+           · 6 Site footer · 7 Home page · 8 Work and About pages
+           · 9 Commissions page
 
    House rules
    - Every element's own declarations live in one rule, and a property is set
@@ -291,7 +292,8 @@ section { padding-block: 4rem; }
 
 #work { border-top: 1px solid var(--hairline); }
 
-.work-heading h2 { font-family: var(--display); font-weight: 400; letter-spacing: -.035em; }
+.work-heading h2,
+.work-group h2 { font-family: var(--display); font-weight: 400; letter-spacing: -.035em; }
 
 .work-all-link {
   display: block;
@@ -317,9 +319,14 @@ section { padding-block: 4rem; }
 .work-card-beluga-and-a380 { grid-area: beluga; }
 .work-card-architecture-in-blue { grid-area: architecture; }
 
-.works img { display: block; width: 100%; height: auto; outline: 1px solid var(--rule); outline-offset: -1px; }
-.works h3 { font-family: var(--sans); font-weight: 600; }
-.works p { margin: 0; color: var(--graphite); }
+/* Card internals are shared with the Work page gallery and the About portrait. */
+.works img,
+.gallery img,
+.profile-art img { display: block; width: 100%; height: auto; outline: 1px solid var(--rule); outline-offset: -1px; }
+.works h3,
+.gallery h3 { font-family: var(--sans); font-weight: 600; }
+.works p,
+.gallery p { margin: 0; color: var(--graphite); }
 
 @media (max-width: 48rem) {
   #work { --gutter: 1rem; padding-top: 1.25rem; }
@@ -330,8 +337,10 @@ section { padding-block: 4rem; }
     grid-template-areas: "crossbow" "night" "beluga" "ship" "architecture";
     gap: 2rem;
   }
-  .works h3 { margin: .45rem 0 .08rem; font-size: 1rem; line-height: 1.2; }
-  .works p { font-size: .9rem; line-height: 1.25; }
+  .works h3,
+  .gallery h3 { margin: .45rem 0 .08rem; font-size: 1rem; line-height: 1.2; }
+  .works p,
+  .gallery p { font-size: .9rem; line-height: 1.25; }
 }
 
 @media (min-width: 48.01rem) {
@@ -343,7 +352,8 @@ section { padding-block: 4rem; }
     grid-template-areas: "crossbow night beluga" "crossbow ship architecture";
     gap: 1.35rem 1.4rem;
   }
-  .works h3 { margin: .55rem 0 .08rem; font-size: 1.15rem; line-height: normal; }
+  .works h3,
+  .gallery h3 { margin: .55rem 0 .08rem; font-size: 1.15rem; line-height: normal; }
 }
 
 
@@ -459,7 +469,48 @@ section { padding-block: 4rem; }
 }
 
 
-/* 8. Commissions page ------------------------------------------------------ */
+/* 8. Work and About pages -------------------------------------------------- */
+
+/* 8.1 Work: one section per category, cards share their look with the home grid */
+
+.work-intro { padding-bottom: 2.5rem; }
+.group-nav { display: flex; flex-wrap: wrap; gap: .75rem 1.5rem; font-family: var(--sans); font-size: .95rem; }
+
+.work-group { padding-block: 2.5rem; border-top: 1px solid var(--hairline); }
+.work-group h2 { margin: 0 0 .5rem; }
+.group-blurb { margin: 0 0 1.75rem; color: var(--graphite); }
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 24rem), 1fr));
+  align-items: start;
+  gap: 2rem 1.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* 8.2 About */
+
+.profile { display: grid; align-items: start; }
+.profile-text > p:not(.lead) { max-width: 36rem; margin: 0 0 1.1rem; }
+.profile-text h2 { margin: 0 0 1rem; font-size: 1.5rem; }
+.profile-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 1.25rem; margin: 1.75rem 0 3rem; }
+.profile-links { display: grid; gap: .6rem; margin: 0; padding: 0; list-style: none; }
+.profile-links span { margin-left: .5rem; color: var(--graphite); font-family: var(--sans); font-size: .9rem; }
+.profile-art { margin: 0; }
+
+@media (max-width: 48rem) {
+  .profile { gap: 2.5rem; }
+  .profile-art { max-width: 24rem; }
+}
+
+@media (min-width: 48.01rem) {
+  .profile { grid-template-columns: minmax(0, 1.25fr) minmax(0, .75fr); gap: 4rem; }
+}
+
+
+/* 9. Commissions page ------------------------------------------------------ */
 
 .lead { max-width: 36rem; margin: 2rem 0; font-size: clamp(1.35rem, 2.6vw, 1.9rem); line-height: 1.4; }
 

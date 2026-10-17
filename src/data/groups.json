@@ -1,0 +1,30 @@
+[
+  {
+    "id": "characters",
+    "title": "Characters",
+    "blurb": "Original characters, D&D, portraits, concept art.",
+    "cover": "crossbow-ranger",
+    "coverAlt": "Character illustration"
+  },
+  {
+    "id": "machines",
+    "title": "Machines",
+    "blurb": "Vehicles, aircraft, ships, technical illustration.",
+    "cover": "beluga-and-a380",
+    "coverAlt": "Aircraft illustration"
+  },
+  {
+    "id": "cities",
+    "title": "Cities",
+    "blurb": "Urban sketches, architecture, places and atmosphere.",
+    "cover": "architecture-in-blue",
+    "coverAlt": "Architecture sketch"
+  },
+  {
+    "id": "sketches",
+    "title": "Sketches",
+    "blurb": "Sketchbooks, studies, ideas and visual notes.",
+    "cover": "night-by-the-river",
+    "coverAlt": "Sketchbook style urban drawing"
+  }
+]
