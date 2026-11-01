@@ -1,0 +1,82 @@
+---
+// One Lab project. Data: src/data/lab.json.
+// ownership: "own" | "exploration" | "fork". The label is always shown, and a fork must name its upstream.
+import { workImage } from "../lib/work-image.js";
+type Ownership = "own" | "exploration" | "fork";
+
+type LabProject = {
+  slug: string;
+  title: string;
+  status?: string;
+  projectType?: string;
+  ownership: Ownership;
+  shortProblem?: string;
+  approach?: string;
+  technologies?: string[];
+  heroImage?: string;
+  heroImageAlt?: string;
+  results?: string[];
+  githubUrl?: string;
+  liveUrl?: string;
+  visualizationUrl?: string;
+  upstream?: string;
+};
+
+const { project } = Astro.props as { project: LabProject };
+const {
+  slug, title, status, projectType, ownership, shortProblem, approach,
+  technologies = [], heroImage, heroImageAlt, results = [],
+  githubUrl, liveUrl, visualizationUrl, upstream,
+} = project;
+
+const labels: Record<Ownership, string> = {
+  own: "Own project",
+  exploration: "Exploration",
+  fork: "Extended open-source project",
+};
+if (!labels[ownership]) throw new Error(`lab.json: "${slug}" needs ownership: own, exploration or fork`);
+if (ownership === "fork" && !(upstream && githubUrl)) throw new Error(`lab.json: fork "${slug}" needs githubUrl and upstream`);
+if (heroImage && !heroImageAlt) throw new Error(`lab.json: "${slug}" needs heroImageAlt`);
+
+const hero = heroImage ? workImage(heroImage, "lab") : null;
+const meta = [projectType, status].filter(Boolean).join(" · ");
+const upstreamName = upstream ? new URL(upstream).pathname.replace(/^\/|\/$/g, "") : "";
+---
+<article class="lab-card" id={slug}>
+  <p class="lab-kind">{labels[ownership]}</p>
+  <h3>{title}</h3>
+  {meta && <p class="lab-meta">{meta}</p>}
+  {hero && (
+    <figure class="lab-plate">
+      <img
+        src={hero.src}
+        srcset={hero.srcset}
+        sizes="(min-width: 48rem) 50vw, 100vw"
+        width={hero.width}
+        height={hero.height}
+        alt={heroImageAlt}
+        loading="lazy"
+        decoding="async"
+      />
+    </figure>
+  )}
+  <dl class="lab-notes">
+    {shortProblem && (<><dt>Problem</dt><dd>{shortProblem}</dd></>)}
+    {approach && (<><dt>Approach</dt><dd>{approach}</dd></>)}
+    {technologies.length > 0 && (<><dt>Technologies</dt><dd>{technologies.join(", ")}</dd></>)}
+    {results.length > 0 && (<><dt>Results</dt><dd><ul>{results.map((r) => <li>{r}</li>)}</ul></dd></>)}
+  </dl>
+  {ownership === "fork" && (
+  <p class="lab-credit">
+    Based on <a href={upstream} target="_blank" rel="noopener noreferrer">{upstreamName}</a>,
+    substantially extended and adapted by Mykhailo Daragan.
+  </p>
+)}
+  {(visualizationUrl || githubUrl || liveUrl) && (
+    <p class="lab-links">
+      {visualizationUrl && <a class="text-link" href={visualizationUrl}>View case study →</a>}
+      {githubUrl && <a class="text-link" href={githubUrl} target="_blank" rel="noopener noreferrer">View code on GitHub →</a>}
+      {liveUrl && <a class="text-link" href={liveUrl} target="_blank" rel="noopener noreferrer">View live project →</a>}
+    </p>
+  )}
+</article>

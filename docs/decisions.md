@@ -102,6 +102,16 @@ Prices and limits were checked between August and October 2026 against vendor do
 
 **Consequences.** One manual step per release. Revisit if more people publish changes.
 
+## ADR-9: Visual Thinking and Lab as data-driven sections
+
+**Context.** The site began as an art portfolio with a commission form. It now also has to show technical competence and visual communication to employers, without turning into a generic developer portfolio.
+
+**Options.** One long portfolio page; a separate developer site; two new sections on the existing site.
+
+**Decision.** Two sections on the existing site. Visual Thinking presents selected drawings as short case studies. Lab presents Python, data and AI experiments, each marked as own project, exploration or fork. Both are driven by JSON files and one card component each, so adding an entry means adding data and image files ([content guide](content-guide.md)).
+
+**Consequences.** Honest labelling is enforced by the build: it fails when a fork has no upstream credit, when ownership is missing or when an image is missing. The Lab launches with one clearly labelled open-source study and says so, and grows as original projects exist. No new framework, service or dependency.
+
 ## Growth path
 
 | Stage | Scope | Gate to enter |

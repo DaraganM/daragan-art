@@ -1,0 +1,17 @@
+[
+  {
+    "slug": "tess-exoplanet-classification",
+    "title": "TESS Exoplanet Classification Exploration",
+    "ownership": "fork",
+    "projectType": "Time-series classification",
+    "shortProblem": "Explore techniques for detecting and classifying candidate transit signals in astronomical time-series data.",
+    "technologies": [
+      "Python",
+      "Scientific computing",
+      "Classification"
+    ],
+    "githubUrl": "https://github.com/DaraganM/Astronet-Triage",
+    "upstream": "https://github.com/yuliang419/Astronet-Triage",
+    "section": "experiments"
+  }
+]

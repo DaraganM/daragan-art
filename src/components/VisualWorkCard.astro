@@ -1,0 +1,59 @@
+---
+// One visual-thinking case study. Data: src/data/visual-thinking.json.
+import { workImage } from "../lib/work-image.js";
+
+const { item } = Astro.props;
+const {
+  slug, title, image, imageAlt, year, medium, purpose, approach,
+  skills = [], processImage, processImageAlt, githubUrl, relatedProjectUrl,
+} = item;
+
+if (!imageAlt) throw new Error(`visual-thinking.json: "${slug}" needs imageAlt`);
+if (processImage && !processImageAlt) throw new Error(`visual-thinking.json: "${slug}" needs processImageAlt`);
+
+const main = workImage(image);
+const process = processImage ? workImage(processImage) : null;
+const meta = [year, medium].filter(Boolean).join(" · ");
+---
+<article class="vw-card" id={slug}>
+  <figure class="vw-plate">
+    <img
+      src={main.src}
+      srcset={main.srcset}
+      sizes="(min-width: 48rem) 50vw, 100vw"
+      width={main.width}
+      height={main.height}
+      alt={imageAlt}
+      loading="lazy"
+      decoding="async"
+    />
+  </figure>
+  <h3>{title}</h3>
+  {meta && <p class="vw-meta">{meta}</p>}
+  <dl class="vw-notes">
+    {purpose && (<><dt>Purpose</dt><dd>{purpose}</dd></>)}
+    {approach && (<><dt>Approach</dt><dd>{approach}</dd></>)}
+  </dl>
+  {skills.length > 0 && <p class="vw-skills"><span>Skills</span> {skills.join(", ")}</p>}
+  {process && (
+    <figure class="vw-process">
+      <img
+        src={process.src}
+        srcset={process.srcset}
+        sizes="(min-width: 48rem) 50vw, 100vw"
+        width={process.width}
+        height={process.height}
+        alt={processImageAlt}
+        loading="lazy"
+        decoding="async"
+      />
+      <figcaption>Process</figcaption>
+    </figure>
+  )}
+  {(relatedProjectUrl || githubUrl) && (
+    <p class="vw-links">
+      {relatedProjectUrl && <a class="text-link" href={relatedProjectUrl}>View case study →</a>}
+      {githubUrl && <a class="text-link" href={githubUrl} target="_blank" rel="noopener noreferrer">View code on GitHub →</a>}
+    </p>
+  )}
+</article>

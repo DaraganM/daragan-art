@@ -1,0 +1,22 @@
+[
+  {
+    "id": "scientific-technical",
+    "title": "Scientific & Technical",
+    "summary": "Technical subjects studied for structure, scale and how their parts relate."
+  },
+  {
+    "id": "architecture-perspective",
+    "title": "Architecture & Perspective",
+    "summary": "Buildings and urban views drawn to understand space, depth and rhythm."
+  },
+  {
+    "id": "vehicles-machines",
+    "title": "Vehicles & Machines",
+    "summary": "Vehicles and machines studied for proportion, volume and mechanical detail."
+  },
+  {
+    "id": "visual-storytelling",
+    "title": "Visual Storytelling",
+    "summary": "Characters and scenes where costume, pose and composition carry the story."
+  }
+]

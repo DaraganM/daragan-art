@@ -1,0 +1,42 @@
+---
+import Base from "../layouts/Base.astro";
+import VisualWorkCard from "../components/VisualWorkCard.astro";
+import categories from "../data/visual-thinking-categories.json";
+import items from "../data/visual-thinking.json";
+
+// Draft entries (placeholders) are never rendered. A category without published works is skipped.
+const sections = categories
+  .map((c) => ({ ...c, items: items.filter((i) => i.category === c.id && !i.draft) }))
+  .filter((c) => c.items.length > 0);
+---
+<Base
+  title="Visual Thinking — Mykhailo Daragan"
+  description="Selected scientific, technical, architectural and narrative studies by Mykhailo Daragan, exploring visual reasoning, structure and communication."
+>
+  <div class="wrap">
+    <section class="work-intro">
+      <h1>Visual Thinking</h1>
+      <p class="lead">Drawing is one of the ways I study complex systems.</p>
+      <p class="intro-text">
+        I use observation, decomposition, perspective and visual hierarchy to understand how
+        objects, spaces and ideas are structured — and how they can be communicated clearly.
+      </p>
+      <nav class="group-nav" aria-label="Visual thinking categories">
+        {sections.map((s) => <a class="text-link" href={`#${s.id}`}>{s.title}</a>)}
+      </nav>
+    </section>
+  </div>
+  {sections.map((s) => (
+    <section id={s.id} class="wrap work-group">
+      <h2>{s.title}</h2>
+      <p class="group-blurb">{s.summary}</p>
+      <ul class="vw-grid">
+        {s.items.map((item) => (<li><VisualWorkCard item={item} /></li>))}
+      </ul>
+    </section>
+  ))}
+  <section class="wrap work-group">
+    <p class="group-blurb">Python, AI and data experiments live in the Lab.</p>
+    <a class="text-link" href="/lab/">Open the Lab →</a>
+  </section>
+</Base>

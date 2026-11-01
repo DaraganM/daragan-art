@@ -4,6 +4,9 @@ import works from "../data/works.json";
 import profile from "../data/profile.json";
 
 const portrait = works.find((w) => w.slug === "crossbow-ranger");
+if (!portrait) {
+  throw new Error('works.json: required work "crossbow-ranger" was not found');
+}
 const links = [
   { label: "GitHub", href: profile.github, note: "code and analysis projects" },
   { label: "Source code of this site", href: profile.repo, note: "Astro on Cloudflare, one Worker" },
@@ -19,6 +22,12 @@ const links = [
       <div class="profile-text">
         <h1>About</h1>
         <p class="lead">An artist with a physicist's eye.</p>
+        <p>
+          I am a physics-trained problem solver combining Python, AI, data and visual communication.{" "}
+<a href="/visual-thinking/">Visual Thinking</a> shows how I study complex subjects through
+          drawing; the <a href="/lab/">Lab</a> collects technical experiments in Python, data analysis
+          and machine learning.
+        </p>
         <p>
           I graduated in physics and astronomy from V. N. Karazin Kharkiv National
           University and now study astrophysics at the University of Bonn.

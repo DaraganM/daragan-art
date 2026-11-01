@@ -1,0 +1,111 @@
+[
+  {
+    "slug": "beluga-and-a380",
+    "title": "BelugaXL and A380",
+    "category": "scientific-technical",
+    "image": "beluga-and-a380",
+    "imageAlt": "Two-page sketchbook spread of an Airbus BelugaXL cargo plane and the tail of an A380, with a small standing figure for scale",
+    "medium": "Ink, marker and colored pencil",
+    "purpose": "Study the scale relationships between very large aircraft, ground equipment and people.",
+    "approach": "The two aircraft are read as large simple volumes. A small standing figure and the boarding stairs fix the scale; surface detail is limited to panel lines, livery and a few shadow planes.",
+    "skills": [
+      "scale and proportion",
+      "spatial reasoning",
+      "observation",
+      "technical detail"
+    ]
+  },
+  {
+    "slug": "scientific-illustration-todo",
+    "category": "scientific-technical",
+    "draft": true,
+    "_todo": "Placeholder, not shown. Add a scientific or astronomical illustration: needs image files (slug-640.webp and slug-1200.webp in public/works/), a title, and purpose and approach written by the artist."
+  },
+  {
+    "slug": "architecture-in-blue",
+    "title": "Architecture in blue ballpoint",
+    "category": "architecture-perspective",
+    "image": "architecture-in-blue",
+    "imageAlt": "Blue ballpoint pen sketch of a stepped building with tall columns and statues on top, with a detail of one statue",
+    "medium": "Ballpoint pen and marker",
+    "purpose": "Study how a monumental façade is built from repeated verticals and stacked terraces.",
+    "approach": "A single blue line carries the structure: strong verticals for the columns, stacked horizontals for the terraces, hatching for shade. Ochre marker marks the main horizontal bands, and a small side study isolates one statue.",
+    "skills": [
+      "perspective",
+      "rhythm and repetition",
+      "line economy",
+      "observation"
+    ]
+  },
+  {
+    "slug": "night-by-the-river",
+    "title": "Night by the river",
+    "category": "architecture-perspective",
+    "image": "night-by-the-river",
+    "imageAlt": "Violet and blue marker sketch of a crowd at night in front of a cable-stayed bridge and a TV tower",
+    "medium": "Marker and ink",
+    "purpose": "Capture the depth of an urban night scene: a bridge and a tower seen over a dense crowd.",
+    "approach": "The crowd in the foreground is reduced to simple dark and light shapes. The bridge cables set the perspective lines, and layers of violet marker separate the sky from the structures.",
+    "skills": [
+      "perspective",
+      "depth layering",
+      "value and color",
+      "simplification"
+    ]
+  },
+  {
+    "slug": "hms-sutherland",
+    "title": "HMS Sutherland",
+    "category": "vehicles-machines",
+    "image": "hms-sutherland",
+    "imageAlt": "Marker and pencil sketch of the frigate HMS Sutherland moored at a quay, with flags along the deck",
+    "year": "2026",
+    "medium": "Ink, marker and pencil",
+    "purpose": "Study the proportions, structure and visual hierarchy of a modern naval vessel.",
+    "approach": "The ship is read as a few large volumes: hull, superstructure and mast. Cross-hatching shapes the curve of the hull, while rigging, flags and equipment are added as progressively smaller detail.",
+    "skills": [
+      "spatial reasoning",
+      "observation",
+      "technical detail",
+      "visual simplification"
+    ]
+  },
+  {
+    "slug": "classic-car",
+    "title": "Classic car",
+    "category": "vehicles-machines",
+    "image": "classic-car",
+    "imageAlt": "Colored pencil drawing of a turquoise 1950s American car in three-quarter view, with chrome grille and tailfins",
+    "medium": "Colored pencil and ink",
+    "purpose": "Study the curved surfaces, reflections and chrome detail of a classic car.",
+    "approach": "Body volumes are modelled with layered color, while a few strong highlights and dark accents describe the glass and chrome. The background stays as loose pencil strokes so the car remains the focus.",
+    "skills": [
+      "form and volume",
+      "reflections",
+      "color layering",
+      "observation"
+    ]
+  },
+  {
+    "slug": "crossbow-ranger",
+    "title": "Crossbow ranger",
+    "category": "visual-storytelling",
+    "image": "crossbow-ranger",
+    "imageAlt": "Full-length drawing of a ranger in a green plaid shirt holding a crossbow, with tools hanging from the belt",
+    "medium": "Ink and color",
+    "purpose": "Show a character's role and habits through costume, equipment and stance.",
+    "approach": "A calm upright pose keeps the silhouette readable. The tool belt, layered clothing and crossbow carry the narrative detail, with color concentrated on the shirt and boots.",
+    "skills": [
+      "character design",
+      "visual storytelling",
+      "costume and props",
+      "silhouette"
+    ]
+  },
+  {
+    "slug": "visual-storytelling-todo",
+    "category": "visual-storytelling",
+    "draft": true,
+    "_todo": "Placeholder, not shown. Add a second storytelling piece (a scene, poster or sequence): needs image files, a title, and purpose and approach written by the artist."
+  }
+]

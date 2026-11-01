@@ -46,7 +46,8 @@ flowchart LR
 
 ## Features
 
-- Home page with hero, selected work, categories, commission process and about section.
+- Pages: home, Work (one section per category), Visual Thinking (drawings as short case studies), Lab (Python, data and AI experiments, each labelled own project, exploration or fork), About, Commissions, plus thanks and 404.
+- Content is data: adding a work or a Lab project is a JSON entry plus image files ([docs/content-guide.md](docs/content-guide.md)). The build fails if a fork lacks its upstream credit or an image is missing.
 - Commissions page with a request form: server-side validation, honeypot, Turnstile check, delivery by e-mail.
 - Responsive from 320 px, visible keyboard focus, reduced-motion preference respected.
 - SEO basics: canonical URLs, Open Graph and Twitter cards, sitemap, robots.txt.
@@ -71,18 +72,21 @@ npm run cf:dev         # site and Worker together, with the form
 
 ## Content
 
-- **Works:** add web-sized WebP files to `public/works/`, an entry to `src/data/works.json` and a `.work-card-<slug>` rule (grid area) to `src/styles/global.css`. Delete files that are no longer used, because everything in `public/` is deployed.
-- **Social links:** `src/data/social.json`.
+- **Works:** add web-sized WebP files to `public/works/` and an entry to `src/data/works.json` with a `group` (an id from `src/data/groups.json`). It then appears on the home page and in its section of the Work page. To place it in the home grid, add a `.work-card-<slug>` rule (grid area) to `src/styles/global.css`; without one it takes the next free cell. Delete files that are no longer used, because everything in `public/` is deployed.
+- **Categories:** `src/data/groups.json` (title, blurb, cover image).
+- **Visual Thinking and Lab:** `src/data/visual-thinking.json` and `src/data/lab.json`, described in [docs/content-guide.md](docs/content-guide.md).
+- **Social links:** `src/data/social.json`. **GitHub and LinkedIn links on the About page:** `src/data/profile.json` (an empty value hides the link).
 
 ## Repository layout
 
 ```text
 .
 ├── src/
-│   ├── pages/              home, commissions, thanks, 404
+│   ├── pages/              home, work, visual-thinking, lab, about, commissions, thanks, 404
 │   ├── layouts/Base.astro  page shell, meta tags, footer
-│   ├── components/         SocialLinks
-│   ├── data/               works.json, social.json
+│   ├── components/         SocialLinks, VisualWorkCard, LabProjectCard
+│   ├── lib/work-image.js   image sizes read from the files at build time
+│   ├── data/               works, groups, visual-thinking, lab, social, profile (JSON)
 │   └── styles/global.css   the only stylesheet
 ├── public/                 static files: works/ (WebP), _headers, robots.txt, icons
 ├── worker/index.js         the only server-side code: POST /api/commission
@@ -95,6 +99,7 @@ npm run cf:dev         # site and Worker together, with the form
 
 - [ ] German, Ukrainian and Russian versions
 - [ ] Online orders and payments for prints and originals
+- [ ] Original Lab projects, each with a visual case study
 - [ ] Lighthouse and accessibility checks in CI
 
 ## Licence and credits

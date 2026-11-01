@@ -8,6 +8,15 @@ const {
   image = "/og-image.png",
 } = Astro.props;
 
+const navLinks = [
+  { href: "/work/", label: "Work" },
+  { href: "/visual-thinking/", label: "Visual Thinking" },
+  { href: "/lab/", label: "Lab" },
+  { href: "/commissions/", label: "Commissions" },
+  { href: "/about/", label: "About" },
+];
+const here = Astro.url.pathname;
+
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const socialImage = new URL(image, Astro.site);
 ---
@@ -46,9 +55,11 @@ const socialImage = new URL(image, Astro.site);
   </div>
 
   <nav class="header-nav" aria-label="Primary navigation">
-    <a href="/work/">Work</a>
-    <a href="/commissions/">Commissions</a>
-    <a href="/about/">About</a>
+    <div class="header-links">
+      {navLinks.map((link) => (
+        <a href={link.href} aria-current={here === link.href ? "page" : undefined}>{link.label}</a>
+      ))}
+    </div>
 
     <a class="header-cta" href="/commissions/">
       Request a commission →
@@ -63,9 +74,9 @@ const socialImage = new URL(image, Astro.site);
 
   <div class="footer-right">
     <nav class="footer-nav" aria-label="Footer navigation">
-      <a href="/work/">Work</a>
-      <a href="/commissions/">Commissions</a>
-      <a href="/about/">About</a>
+      {navLinks.map((link) => (
+        <a href={link.href} aria-current={here === link.href ? "page" : undefined}>{link.label}</a>
+      ))}
     </nav>
 
     <SocialLinks />

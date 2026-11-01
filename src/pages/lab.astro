@@ -1,0 +1,45 @@
+---
+import Base from "../layouts/Base.astro";
+import LabProjectCard from "../components/LabProjectCard.astro";
+import projects from "../data/lab.json";
+import profile from "../data/profile.json";
+
+const experiments = projects.filter((p) => (p.section ?? "experiments") === "experiments");
+const visualizations = projects.filter((p) => p.section === "visualization");
+---
+<Base
+  title="Lab — AI, Data & Scientific Visualization — Mykhailo Daragan"
+  description="Python, AI, data analysis and scientific-visualization experiments by Mykhailo Daragan."
+>
+  <div class="wrap">
+    <section class="work-intro">
+      <h1>AI, Data &amp; Scientific Visualization</h1>
+      <p class="lead">I use Python, data analysis and machine learning to explore scientific and real-world problems.</p>
+      <p class="intro-text">This lab collects selected technical experiments together with the visual explanations behind them.</p>
+    </section>
+  </div>
+  <section id="experiments" class="wrap work-group">
+    <h2>Selected experiments</h2>
+    {experiments.length > 0 ? (
+      <ul class="lab-grid">
+        {experiments.map((project) => (<li><LabProjectCard project={project} /></li>))}
+      </ul>
+    ) : (
+      <p class="group-blurb">No experiments are published yet.</p>
+    )}
+  </section>
+  <section id="visualization" class="wrap work-group">
+    <h2>Scientific visualization</h2>
+    {visualizations.length > 0 ? (
+      <ul class="lab-grid">
+        {visualizations.map((project) => (<li><LabProjectCard project={project} /></li>))}
+      </ul>
+    ) : (
+      <p class="group-blurb">Visual explanations of the experiments will appear here. None are published yet.</p>
+    )}
+  </section>
+  <section class="wrap work-group">
+    <p class="group-blurb">All repositories, including work in progress, are on GitHub.</p>
+    <a class="text-link" href={profile.github} target="_blank" rel="noopener noreferrer">View all repositories on GitHub →</a>
+  </section>
+</Base>
